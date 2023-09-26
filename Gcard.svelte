@@ -1,13 +1,18 @@
 <script>
-  export let hidden = false;
-  export let lightmode = false;
+  export let hidden         = false;
+  export let lightmode      = false;
+  export let header         = "";
+  export let bordered       = false;
 </script>
 
-<wrapper class:hide={hidden === true}>
-  <div class="card" class:lightmode>
-    <slot />
-  </div>
-</wrapper>
+
+<div class="gcard" class:lightmode class:hide={hidden === true} class:bordered={bordered}>
+  {#if header != "" }
+    <div class="card-header">{header}</div>
+    <div class="ui divider" />
+  {/if}
+  <slot />
+</div>
 
 <style>
   @keyframes slideIn {
@@ -18,35 +23,34 @@
       transform: translateX(0);
     }
   }
-  wrapper {
+
+  .gcard {
     display: flex;
+    width: var(--card-width,100%);
+    padding: var(--card-padding,1em);
     height: 100%;
-    width: fit-content;
     animation: 0.3s ease-in 0s 1 slideIn;
     transition: all 0.5s ease-in-out;
-    margin-right: 0.5em;
-  }
-  .card {
+    margin: 0em;
+    margin-left: var(--card-margin-left, 0em);
     font-size: large;
     box-shadow: 0 1px 30px rgb(0 0 0 / 10%);
     -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0;
     overflow: hidden;
     border-radius: 15px;
     color: white;
-    width: 15em;
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
   }
   @supports (backdrop-filter: none) {
-    .card {
+    .gcard {
       background-color: rgba(59, 59, 59, 0.5);
       backdrop-filter: blur(10px) brightness(50%);
     }
   }
-  .card::-webkit-scrollbar {
+  .gcard::-webkit-scrollbar {
     display: none;
   }
   .hide {
@@ -63,4 +67,21 @@
       backdrop-filter: blur(10px) brightness(100%);
     }
   }
+  .divider {
+    width: 100%;
+    margin-top: 0;
+  }
+  .card-header {
+    margin: 1em;
+    margin-top: 0px;
+    text-align: center;
+    width: 100%;
+    font-size: 1em;
+    font-weight: 600;
+  }
+  .bordered {
+    border-style: solid;
+    border-color: var(--theme-color, rgb(125, 14, 158))
+  }
+
 </style>
