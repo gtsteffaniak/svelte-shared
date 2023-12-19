@@ -28,7 +28,6 @@
     display: flex;
     width: var(--card-width,100%);
     padding: var(--card-padding,1em);
-    height: 100%;
     animation: 0.3s ease-in 0s 1 slideIn;
     transition: all 0.5s ease-in-out;
     margin: 0em;
