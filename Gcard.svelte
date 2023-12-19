@@ -1,20 +1,25 @@
 <script>
-  export let hidden         = false;
-  export let lightmode      = false;
-  export let header         = "";
-  export let bordered       = false;
+  export let hidden = false;
+  export let lightmode = false;
+  export let header = "";
+  export let bordered = false;
 </script>
 
-
-<div class="gcard" class:lightmode class:hide={hidden === true} class:bordered={bordered}>
-  {#if header != "" }
+<div class="gcard" class:lightmode class:hide={hidden === true} class:bordered>
+  {#if header != ""}
     <div class="card-header">{header}</div>
-    <div class="ui divider" />
+    <hr />
   {/if}
   <slot />
 </div>
 
 <style>
+  hr {
+    width: 100%;
+    border-style: revert;
+    margin: 0px;
+    margin-bottom: 1em;
+  }
   @keyframes slideIn {
     0% {
       transform: translateX(-10%);
@@ -26,8 +31,8 @@
 
   .gcard {
     display: flex;
-    width: var(--card-width,100%);
-    padding: var(--card-padding,1em);
+    width: var(--card-width, 100%);
+    padding: var(--card-padding, 1em);
     animation: 0.3s ease-in 0s 1 slideIn;
     transition: all 0.5s ease-in-out;
     margin: 0em;
@@ -36,7 +41,7 @@
     box-shadow: 0 1px 30px rgb(0 0 0 / 10%);
     -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 1em;
     color: white;
     display: flex;
     flex-direction: column;
@@ -66,10 +71,7 @@
       backdrop-filter: blur(10px) brightness(100%);
     }
   }
-  .divider {
-    width: 100%;
-    margin-top: 0;
-  }
+
   .card-header {
     margin: 1em;
     margin-top: 0px;
@@ -80,7 +82,6 @@
   }
   .bordered {
     border-style: solid;
-    border-color: var(--theme-color, rgb(125, 14, 158))
+    border-color: var(--theme-color, rgb(125, 14, 158));
   }
-
 </style>
